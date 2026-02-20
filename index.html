@@ -6,31 +6,30 @@
 
 <title>Sexy Craic — Private Access</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
 body {
   margin:0;
-  font-family: 'Playfair Display', serif;
-  background: radial-gradient(circle at top, #1a0000, #000000 65%);
+  font-family:'Playfair Display', serif;
+  background: radial-gradient(circle at top, #1a0000, #000000 70%);
   color:white;
   text-align:center;
-  padding:50px 20px;
+  padding:60px 20px;
 }
 
 .main-title {
-  font-family: 'Great Vibes', cursive;
-  font-size:3.5rem;
+  font-family:'Great Vibes', cursive;
+  font-size:3.8rem;
   color:#d4af37;
+  text-shadow:0 0 25px rgba(212,175,55,0.6);
   margin-bottom:5px;
-  text-shadow:0 0 25px rgba(212,175,55,0.5);
 }
 
 .subtitle {
   letter-spacing:3px;
-  font-size:0.9rem;
+  font-size:0.8rem;
   opacity:0.7;
   margin-bottom:40px;
 }
@@ -45,7 +44,9 @@ body {
   backdrop-filter:blur(12px);
 }
 
-.hidden { display:none; }
+.hidden {
+  display:none;
+}
 
 input {
   padding:14px;
@@ -58,11 +59,11 @@ input {
   background:#111;
   color:white;
   border:1px solid #333;
-  font-family: 'Playfair Display', serif;
+  font-family:'Playfair Display', serif;
 }
 
 button {
-  margin-top:20px;
+  margin-top:18px;
   padding:12px 35px;
   border-radius:30px;
   border:none;
@@ -71,7 +72,7 @@ button {
   font-weight:600;
   cursor:pointer;
   letter-spacing:1px;
-  font-family: 'Playfair Display', serif;
+  font-family:'Playfair Display', serif;
 }
 
 button:hover {
@@ -106,7 +107,9 @@ button:hover {
 <body>
 
 <div class="main-title">Sexy Craic</div>
-<div class="subtitle">PRIVATE ACCESS • MEMBERS ONLY</div>
+<div class="subtitle">ALBA — BIRTHDAY NIGHT • MEMBERS ONLY</div>
+
+<!-- LOGIN BOX -->
 
 <div class="box" id="loginBox">
   <p>Enter password to unlock the experience.</p>
@@ -116,6 +119,8 @@ button:hover {
   <p id="errorMsg" style="color:#ff4d4d;"></p>
 </div>
 
+<!-- CONTENT BOX -->
+
 <div class="box hidden" id="contentBox">
 
   <div class="countdown">
@@ -124,12 +129,42 @@ button:hover {
 
   <div class="details">
     <p><span class="highlight">Saturday 14 March</span> — 20:00 till late</p>
-    <p>Dublin — Private Location</p>
+    <p>
+  Dublin — <span class="highlight">Private Location</span><br>
+  <a href="https://share.google/7ZVDNCD9aM196qA7U" 
+     target="_blank" 
+     style="color:#d4af37; text-decoration:none; font-size:0.9rem;">
+     View Location →
+  </a>
+</p>
 
-    <p><span class="highlight">Dress Code:</span> Red / Green — Elevated</p>
-    <p><span class="highlight">Drinks:</span> Sangría & Tinto provided</p>
+    <p><span class="highlight">Dress Code:</span> Hot & Sexy</p>
+    <p><span class="highlight">Drinks:</span> Tinto provided</p>
     <p><span class="highlight">BYOB:</span> Required</p>
     <p>Predrinks → Then Club</p>
+  </div>
+
+  <!-- RSVP SECTION -->
+
+  <div style="margin-top:35px;">
+
+    <p class="highlight" style="margin-bottom:10px;">
+      RSVP — Guest List Registration
+    </p>
+
+    <input 
+      type="text" 
+      id="guestName" 
+      placeholder="Enter your name">
+    
+    <br>
+
+    <button onclick="submitRSVP()">
+      REGISTER
+    </button>
+
+    <p id="rsvpMsg" style="margin-top:12px;font-size:0.9rem;"></p>
+
   </div>
 
 </div>
@@ -140,7 +175,10 @@ Sexy Craic • Dublin
 
 <script>
 
+// PASSWORD
 const correctPassword = "slainte";
+
+// COUNTDOWN DATE
 const partyDate = new Date("March 14, 2026 20:00:00").getTime();
 
 function checkPassword(){
@@ -153,6 +191,7 @@ function checkPassword(){
   }
 }
 
+// COUNTDOWN
 function updateCountdown(){
   const now = new Date().getTime();
   const distance = partyDate - now;
@@ -170,6 +209,25 @@ function updateCountdown(){
 
 setInterval(updateCountdown,1000);
 updateCountdown();
+
+// RSVP
+function submitRSVP() {
+
+  const name = document.getElementById("guestName").value.trim();
+  const msg = document.getElementById("rsvpMsg");
+
+  if (!name) {
+    msg.style.color = "#ff4d4d";
+    msg.textContent = "Please enter your name.";
+    return;
+  }
+
+  msg.style.color = "#7CFC98";
+  msg.textContent = "Opening registration form…";
+
+  window.open("https://forms.gle/EVHBFan5UkGoGiDy6", "_blank");
+
+}
 
 </script>
 
