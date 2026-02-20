@@ -6,105 +6,146 @@
 
 <title>Sexy Craic — Private Access</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --gold:#d8c07a;         /* softer champagne gold */
+  --gold-strong:#d4af37;  /* your classic gold */
+  --bg1:#1a0000;
+  --bg2:#000000;
+}
 
 body {
   margin:0;
   font-family:'Playfair Display', serif;
-  background: radial-gradient(circle at top, #1a0000, #000000 70%);
+  background: radial-gradient(circle at top, var(--bg1), var(--bg2) 72%);
   color:white;
   text-align:center;
-  padding:60px 20px;
+  padding:70px 20px;
 }
 
-
+/* Title: refined script + more spacing */
 .main-title {
   font-family:'Dancing Script', cursive;
   font-size:3.9rem;
   font-weight:600;
   letter-spacing:1.5px;
-  color:#d4af37;
+  color:var(--gold);
   text-shadow:0 0 22px rgba(216,192,122,0.45);
   margin-bottom:8px;
 }
 
-
 .subtitle {
-  letter-spacing:3px;
-  font-size:0.8rem;
-  opacity:0.7;
-  margin-bottom:40px;
+  letter-spacing:4px;
+  font-size:0.78rem;
+  opacity:0.68;
+  margin-bottom:48px;
 }
 
 .box {
-  max-width:650px;
+  max-width:670px;
   margin:0 auto;
-  padding:35px;
-  background:rgba(0,0,0,0.65);
-  border:1px solid rgba(212,175,55,0.25);
-  border-radius:25px;
-  backdrop-filter:blur(12px);
+  padding:40px 34px;
+  background:rgba(0,0,0,0.62);
+  border:1px solid rgba(216,192,122,0.22);
+  border-radius:24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 38px rgba(0,0,0,0.35);
 }
 
-.hidden {
-  display:none;
+.hidden { display:none; }
+
+p{
+  margin: 10px 0;
 }
 
 input {
-  padding:14px;
-  width:70%;
-  max-width:280px;
-  border-radius:30px;
+  padding:14px 16px;
+  width:72%;
+  max-width:320px;
+  border-radius:28px;
   border:none;
   text-align:center;
   font-size:1rem;
-  background:#111;
+  background:rgba(17,17,17,0.92);
   color:white;
-  border:1px solid #333;
+  border:1px solid rgba(255,255,255,0.14);
   font-family:'Playfair Display', serif;
+  outline:none;
+}
+
+input:focus{
+  border-color: rgba(216,192,122,0.55);
+  box-shadow: 0 0 0 3px rgba(216,192,122,0.12);
 }
 
 button {
   margin-top:18px;
-  padding:12px 35px;
+  padding:12px 40px;
   border-radius:30px;
-  border:none;
-  background:#d4af37;
+  border:1px solid rgba(216,192,122,0.0);
+  background:var(--gold);
   color:black;
   font-weight:600;
   cursor:pointer;
-  letter-spacing:1px;
+  letter-spacing:2px;
   font-family:'Playfair Display', serif;
+  transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
   background:#f1d77a;
+  box-shadow: 0 10px 26px rgba(216,192,122,0.18);
+  transform: translateY(-1px);
 }
 
 .highlight {
-  color:#d4af37;
+  color:var(--gold);
   font-weight:600;
 }
 
 .countdown {
-  margin:25px 0;
-  font-size:1.2rem;
+  margin:22px 0 10px;
+  font-size:1.15rem;
   letter-spacing:2px;
+  opacity:0.95;
 }
 
 .details {
-  line-height:1.8;
-  margin-top:20px;
+  line-height:1.9;
+  margin-top:18px;
 }
 
 .footer {
-  margin-top:50px;
+  margin-top:55px;
   font-size:0.75rem;
-  opacity:0.5;
+  opacity:0.45;
+  letter-spacing:2px;
 }
 
+/* subtle link styling */
+a.location-link{
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.92rem;
+  letter-spacing: 1px;
+}
+a.location-link:hover{
+  text-decoration: underline;
+}
+
+/* Tiny harp watermark */
+.harp {
+  position: fixed;
+  bottom: 18px;
+  right: 22px;
+  width: 54px;
+  opacity: 0.06;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(216,192,122,0.15));
+}
 </style>
 </head>
 
@@ -114,17 +155,15 @@ button:hover {
 <div class="subtitle">ALBA — BIRTHDAY NIGHT • MEMBERS ONLY</div>
 
 <!-- LOGIN BOX -->
-
 <div class="box" id="loginBox">
-  <p>Enter password to unlock the experience.</p>
+  <p style="opacity:0.9;">Enter password to unlock the experience.</p>
   <input type="password" id="passwordInput" placeholder="Password">
   <br>
   <button onclick="checkPassword()">ENTER</button>
-  <p id="errorMsg" style="color:#ff4d4d;"></p>
+  <p id="errorMsg" style="color:#ff4d4d; margin-top:14px;"></p>
 </div>
 
 <!-- CONTENT BOX -->
-
 <div class="box hidden" id="contentBox">
 
   <div class="countdown">
@@ -133,42 +172,34 @@ button:hover {
 
   <div class="details">
     <p><span class="highlight">Saturday 14 March</span> — 20:00 till late</p>
-    <p>
-  Dublin — <span class="highlight">Private Location</span><br>
-  <a href="https://share.google/7ZVDNCD9aM196qA7U" 
-     target="_blank" 
-     style="color:#d4af37; text-decoration:none; font-size:0.9rem;">
-     View Location →
-  </a>
-</p>
 
-    <p><span class="highlight">Dress Code:</span> Hot & Sexy</p>
+    <p>
+      Dublin — <span class="highlight">Private Location</span><br>
+      <a class="location-link"
+         href="https://share.google/7ZVDNCD9aM196qA7U"
+         target="_blank">
+         View Location →
+      </a>
+    </p>
+
+    <p><span class="highlight">Dress Code:</span> Hot &amp; Sexy</p>
     <p><span class="highlight">Drinks:</span> Tinto provided</p>
     <p><span class="highlight">BYOB:</span> Required</p>
     <p>Predrinks → Then Club</p>
   </div>
 
   <!-- RSVP SECTION -->
-
-  <div style="margin-top:35px;">
-
-    <p class="highlight" style="margin-bottom:10px;">
+  <div style="margin-top:38px;">
+    <p class="highlight" style="margin-bottom:12px; letter-spacing:1px;">
       RSVP — Guest List Registration
     </p>
 
-    <input 
-      type="text" 
-      id="guestName" 
-      placeholder="Enter your name">
-    
+    <input type="text" id="guestName" placeholder="Enter your name">
     <br>
 
-    <button onclick="submitRSVP()">
-      REGISTER
-    </button>
+    <button onclick="submitRSVP()">REGISTER</button>
 
     <p id="rsvpMsg" style="margin-top:12px;font-size:0.9rem;"></p>
-
   </div>
 
 </div>
@@ -177,8 +208,14 @@ button:hover {
 Sexy Craic • Dublin
 </div>
 
-<script>
+<!-- Tiny harp watermark (SVG) -->
+<div class="harp" aria-hidden="true">
+  <svg viewBox="0 0 512 512" fill="#d8c07a">
+    <path d="M256 32c-88 0-160 72-160 160 0 64 40 120 96 144v112h128V336c56-24 96-80 96-144 0-88-72-160-160-160zm0 32c70.7 0 128 57.3 128 128 0 51.5-30.8 95.8-75 116.4l-21 9.8V416h-64v-97.8l-21-9.8C158.8 287.8 128 243.5 128 192c0-70.7 57.3-128 128-128z"/>
+  </svg>
+</div>
 
+<script>
 // PASSWORD
 const correctPassword = "slainte";
 
@@ -199,14 +236,17 @@ function checkPassword(){
 function updateCountdown(){
   const now = new Date().getTime();
   const distance = partyDate - now;
+
   if(distance < 0){
     document.getElementById("timer").innerHTML = "Doors Open.";
     return;
   }
+
   const d = Math.floor(distance / (1000*60*60*24));
   const h = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
   const m = Math.floor((distance % (1000*60*60))/(1000*60));
   const s = Math.floor((distance % (1000*60))/1000);
+
   document.getElementById("timer").innerHTML =
     d+"D "+h+"H "+m+"M "+s+"S";
 }
@@ -216,7 +256,6 @@ updateCountdown();
 
 // RSVP
 function submitRSVP() {
-
   const name = document.getElementById("guestName").value.trim();
   const msg = document.getElementById("rsvpMsg");
 
@@ -230,9 +269,7 @@ function submitRSVP() {
   msg.textContent = "Opening registration form…";
 
   window.open("https://forms.gle/EVHBFan5UkGoGiDy6", "_blank");
-
 }
-
 </script>
 
 </body>
