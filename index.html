@@ -6,145 +6,146 @@
 
 <title>Sexy Craic — Private Access</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --gold:#d8c07a;         /* softer champagne gold */
-  --gold-strong:#d4af37;  /* your classic gold */
-  --bg1:#1a0000;
-  --bg2:#000000;
+  --gold:#d4af37;
+  --bgTop:#220006;
+  --bgMid:#0b0002;
+  --bgBot:#000000;
 }
 
-body {
+body{
   margin:0;
   font-family:'Playfair Display', serif;
-  background: radial-gradient(circle at top, var(--bg1), var(--bg2) 72%);
-  color:white;
+  color:#fff;
   text-align:center;
-  padding:70px 20px;
+  padding:60px 20px;
+  background:
+    linear-gradient(180deg, var(--bgTop) 0%, var(--bgMid) 45%, var(--bgBot) 100%);
+  overflow-x:hidden;
 }
 
-/* Title: refined script + more spacing */
-.main-title {
-  font-family:'Dancing Script', cursive;
-  font-size:3.9rem;
-  font-weight:600;
-  letter-spacing:1.5px;
+/* soft vignette overlay to add depth + hide any banding */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%);
+  z-index:-1;
+}
+
+.main-title{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:4rem;
+  letter-spacing:2px;
   color:var(--gold);
-  text-shadow:0 0 22px rgba(216,192,122,0.45);
+  text-shadow:0 0 25px rgba(212,175,55,0.5);
   margin-bottom:8px;
 }
 
-.subtitle {
+.subtitle{
   letter-spacing:4px;
-  font-size:0.78rem;
-  opacity:0.68;
-  margin-bottom:48px;
+  font-size:0.8rem;
+  opacity:0.7;
+  margin-bottom:45px;
 }
 
-.box {
-  max-width:670px;
+.box{
+  max-width:650px;
   margin:0 auto;
-  padding:40px 34px;
+  padding:38px;
   background:rgba(0,0,0,0.62);
-  border:1px solid rgba(216,192,122,0.22);
-  border-radius:24px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 38px rgba(0,0,0,0.35);
+  border:1px solid rgba(212,175,55,0.25);
+  border-radius:25px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 18px 55px rgba(0,0,0,0.35);
 }
 
-.hidden { display:none; }
+.hidden{ display:none; }
 
-p{
-  margin: 10px 0;
-}
-
-input {
-  padding:14px 16px;
-  width:72%;
-  max-width:320px;
-  border-radius:28px;
+input{
+  padding:14px;
+  width:70%;
+  max-width:280px;
+  border-radius:30px;
   border:none;
   text-align:center;
   font-size:1rem;
-  background:rgba(17,17,17,0.92);
+  background:#111;
   color:white;
-  border:1px solid rgba(255,255,255,0.14);
+  border:1px solid #333;
   font-family:'Playfair Display', serif;
   outline:none;
 }
 
 input:focus{
-  border-color: rgba(216,192,122,0.55);
-  box-shadow: 0 0 0 3px rgba(216,192,122,0.12);
+  border-color:var(--gold);
+  box-shadow:0 0 0 2px rgba(212,175,55,0.2);
 }
 
-button {
+button{
   margin-top:18px;
-  padding:12px 40px;
+  padding:12px 35px;
   border-radius:30px;
-  border:1px solid rgba(216,192,122,0.0);
+  border:none;
   background:var(--gold);
   color:black;
   font-weight:600;
   cursor:pointer;
-  letter-spacing:2px;
+  letter-spacing:1px;
   font-family:'Playfair Display', serif;
-  transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition:transform 0.15s ease, background 0.2s ease;
 }
 
-button:hover {
+button:hover{
   background:#f1d77a;
-  box-shadow: 0 10px 26px rgba(216,192,122,0.18);
-  transform: translateY(-1px);
+  transform:translateY(-1px);
 }
 
-.highlight {
+.highlight{
   color:var(--gold);
   font-weight:600;
 }
 
-.countdown {
-  margin:22px 0 10px;
-  font-size:1.15rem;
+.countdown{
+  margin:25px 0;
+  font-size:1.2rem;
   letter-spacing:2px;
-  opacity:0.95;
 }
 
-.details {
-  line-height:1.9;
-  margin-top:18px;
+.details{
+  line-height:1.8;
+  margin-top:20px;
 }
 
-.footer {
+.footer{
   margin-top:55px;
   font-size:0.75rem;
-  opacity:0.45;
+  opacity:0.5;
   letter-spacing:2px;
 }
 
-/* subtle link styling */
 a.location-link{
-  color: var(--gold);
-  text-decoration: none;
-  font-size: 0.92rem;
-  letter-spacing: 1px;
+  color:var(--gold);
+  text-decoration:none;
+  font-size:0.9rem;
 }
-a.location-link:hover{
-  text-decoration: underline;
-}
+a.location-link:hover{ text-decoration:underline; }
 
-/* Tiny harp watermark */
-.harp {
-  position: fixed;
-  bottom: 18px;
-  right: 22px;
-  width: 54px;
-  opacity: 0.06;
-  pointer-events: none;
-  filter: drop-shadow(0 0 10px rgba(216,192,122,0.15));
+/* Real harp watermark */
+.harp{
+  position:fixed;
+  bottom:18px;
+  right:20px;
+  width:58px;
+  opacity:0.07;           /* subtle */
+  pointer-events:none;
+  filter:drop-shadow(0 0 10px rgba(212,175,55,0.12));
 }
 </style>
 </head>
@@ -154,16 +155,14 @@ a.location-link:hover{
 <div class="main-title">Sexy Craic</div>
 <div class="subtitle">ALBA — BIRTHDAY NIGHT • MEMBERS ONLY</div>
 
-<!-- LOGIN BOX -->
 <div class="box" id="loginBox">
-  <p style="opacity:0.9;">Enter password to unlock the experience.</p>
+  <p>Enter password to unlock the experience.</p>
   <input type="password" id="passwordInput" placeholder="Password">
   <br>
   <button onclick="checkPassword()">ENTER</button>
-  <p id="errorMsg" style="color:#ff4d4d; margin-top:14px;"></p>
+  <p id="errorMsg" style="color:#ff4d4d;"></p>
 </div>
 
-<!-- CONTENT BOX -->
 <div class="box hidden" id="contentBox">
 
   <div class="countdown">
@@ -188,9 +187,8 @@ a.location-link:hover{
     <p>Predrinks → Then Club</p>
   </div>
 
-  <!-- RSVP SECTION -->
-  <div style="margin-top:38px;">
-    <p class="highlight" style="margin-bottom:12px; letter-spacing:1px;">
+  <div style="margin-top:35px;">
+    <p class="highlight" style="margin-bottom:10px;">
       RSVP — Guest List Registration
     </p>
 
@@ -208,10 +206,21 @@ a.location-link:hover{
 Sexy Craic • Dublin
 </div>
 
-<!-- Tiny harp watermark (SVG) -->
+<!-- REAL harp watermark (clean outline) -->
 <div class="harp" aria-hidden="true">
-  <svg viewBox="0 0 512 512" fill="#d8c07a">
-    <path d="M256 32c-88 0-160 72-160 160 0 64 40 120 96 144v112h128V336c56-24 96-80 96-144 0-88-72-160-160-160zm0 32c70.7 0 128 57.3 128 128 0 51.5-30.8 95.8-75 116.4l-21 9.8V416h-64v-97.8l-21-9.8C158.8 287.8 128 243.5 128 192c0-70.7 57.3-128 128-128z"/>
+  <svg viewBox="0 0 64 64" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- harp body -->
+    <path d="M40 10c-8 2-13 9-13 18v21c0 4-3 7-7 7"/>
+    <path d="M40 10c6 7 9 15 9 27v12c0 5-4 9-9 9H28"/>
+    <!-- soundboard curve -->
+    <path d="M27 26c6 2 13 2 22-1"/>
+    <!-- base -->
+    <path d="M16 56h27"/>
+    <!-- strings -->
+    <path d="M33 18v34"/>
+    <path d="M37 17v35"/>
+    <path d="M41 16v36"/>
+    <path d="M45 15v37"/>
   </svg>
 </div>
 
