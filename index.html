@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Craic — Private Access</title>
+
+<style>
+body {
+  margin:0;
+  font-family: 'Arial', sans-serif;
+  background: radial-gradient(circle at top, #1a0000, #000000 60%);
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+}
+
+h1 {
+  font-size:2.8rem;
+  letter-spacing:3px;
+  color:#d4af37;
+  text-shadow:0 0 20px rgba(212,175,55,0.4);
+  margin-bottom:5px;
+}
+
+h2 {
+  font-weight:300;
+  letter-spacing:2px;
+  opacity:0.8;
+}
+
+.box {
+  max-width:650px;
+  margin:30px auto;
+  padding:30px;
+  background:rgba(0,0,0,0.6);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+}
+
+.hidden { display:none; }
+
+input {
+  padding:14px;
+  width:70%;
+  max-width:260px;
+  border-radius:30px;
+  border:none;
+  text-align:center;
+  font-size:1rem;
+  background:#111;
+  color:white;
+  border:1px solid #333;
+}
+
+button {
+  margin-top:20px;
+  padding:12px 30px;
+  border-radius:30px;
+  border:none;
+  background:#d4af37;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  letter-spacing:1px;
+}
+
+button:hover {
+  background:#f1d77a;
+}
+
+.highlight {
+  color:#d4af37;
+  font-weight:bold;
+}
+
+.countdown {
+  margin:25px 0;
+  font-size:1.3rem;
+  letter-spacing:2px;
+}
+
+.rulebox {
+  margin-top:20px;
+  text-align:left;
+  font-size:0.95rem;
+  opacity:0.85;
+}
+
+.footer {
+  margin-top:30px;
+  font-size:0.8rem;
+  opacity:0.5;
+}
+</style>
+</head>
+
+<body>
+
+<h1>VIP CRAIC</h1>
+<h2>Private Members Access</h2>
+
+<div class="box" id="loginBox">
+  <p>Enter password to unlock the experience.</p>
+  <input type="password" id="passwordInput" placeholder="Password">
+  <br>
+  <button onclick="checkPassword()">ENTER</button>
+  <p id="errorMsg" style="color:#ff4d4d;"></p>
+</div>
+
+<div class="box hidden" id="contentBox">
+
+  <div class="countdown">
+    <span id="timer"></span>
+  </div>
+
+  <p><span class="highlight">Saturday 14 March</span> — 20:00 till late</p>
+  <p>Dublin — Private Location</p>
+
+  <p><span class="highlight">Dress Code:</span> Red / Green — Elevated</p>
+  <p><span class="highlight">Drinks:</span> Sangría & Tinto provided</p>
+  <p><span class="highlight">BYOB:</span> Required</p>
+  <p>Predrinks → Then Club</p>
+
+  <div class="rulebox">
+    No bad energy.  
+    Say “Salud” before drinking.  
+    Say “Sláinte” when you see the flag.  
+  </div>
+
+</div>
+
+<div class="footer">
+VIP Craic • Members Only • Dublin
+</div>
+
+<script>
+
+const correctPassword = "whatsthecraic";
+const partyDate = new Date("March 14, 2026 20:00:00").getTime();
+
+function checkPassword(){
+  const input = document.getElementById("passwordInput").value;
+  if(input === correctPassword){
+    document.getElementById("loginBox").classList.add("hidden");
+    document.getElementById("contentBox").classList.remove("hidden");
+  } else {
+    document.getElementById("errorMsg").textContent = "Access Denied.";
+  }
+}
+
+function updateCountdown(){
+  const now = new Date().getTime();
+  const distance = partyDate - now;
+  if(distance < 0){
+    document.getElementById("timer").innerHTML = "Doors Open.";
+    return;
+  }
+  const d = Math.floor(distance / (1000*60*60*24));
+  const h = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((distance % (1000*60*60))/(1000*60));
+  const s = Math.floor((distance % (1000*60))/1000);
+  document.getElementById("timer").innerHTML =
+    d+"D "+h+"H "+m+"M "+s+"S";
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+</script>
+
+</body>
+</html>
