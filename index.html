@@ -136,16 +136,33 @@ a.location-link:hover{
   text-decoration: underline;
 }
 
-/* Tiny harp watermark */
+/* Harp watermark */
 .harp {
   position: fixed;
-  bottom: 18px;
-  right: 22px;
-  width: 54px;
-  opacity: 0.06;
+  bottom: 40px;      /* move it up */
+  right: 40px;       /* move it inward */
+  width: 95px;       /* bigger */
+  opacity: 0.14;     /* more visible but still elegant */
   pointer-events: none;
-  filter: drop-shadow(0 0 10px rgba(216,192,122,0.15));
 }
+
+.harp img{
+  width:100%;
+  height:auto;
+  display:block;
+
+  /* cleaner gold tint */
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(78%)
+    sepia(45%)
+    saturate(700%)
+    hue-rotate(2deg)
+    brightness(98%)
+    contrast(95%);
+}
+  
 </style>
 </head>
 
