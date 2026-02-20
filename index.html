@@ -9,66 +9,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --gold:#d4af37;
-  --bgTop:#220006;
-  --bgMid:#0b0002;
-  --bgBot:#000000;
-}
 
-body{
+body {
   margin:0;
   font-family:'Playfair Display', serif;
-  color:#fff;
+  background: radial-gradient(circle at top, #1a0000, #000000 70%);
+  color:white;
   text-align:center;
   padding:60px 20px;
-  background:
-    linear-gradient(180deg, var(--bgTop) 0%, var(--bgMid) 45%, var(--bgBot) 100%);
-  overflow-x:hidden;
 }
 
-/* soft vignette overlay to add depth + hide any banding */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%);
-  z-index:-1;
-}
-
-.main-title{
+.main-title {
   font-family:'Cormorant Garamond', serif;
   font-style:italic;
   font-size:4rem;
   letter-spacing:2px;
-  color:var(--gold);
+  color:#d4af37;
   text-shadow:0 0 25px rgba(212,175,55,0.5);
   margin-bottom:8px;
 }
 
-.subtitle{
+.subtitle {
   letter-spacing:4px;
   font-size:0.8rem;
   opacity:0.7;
   margin-bottom:45px;
 }
 
-.box{
+.box {
   max-width:650px;
   margin:0 auto;
   padding:38px;
-  background:rgba(0,0,0,0.62);
+  background:rgba(0,0,0,0.65);
   border:1px solid rgba(212,175,55,0.25);
   border-radius:25px;
   backdrop-filter:blur(12px);
-  box-shadow:0 18px 55px rgba(0,0,0,0.35);
 }
 
-.hidden{ display:none; }
+.hidden {
+  display:none;
+}
 
-input{
+input {
   padding:14px;
   width:70%;
   max-width:280px;
@@ -80,73 +62,76 @@ input{
   color:white;
   border:1px solid #333;
   font-family:'Playfair Display', serif;
-  outline:none;
 }
 
 input:focus{
-  border-color:var(--gold);
+  border-color:#d4af37;
   box-shadow:0 0 0 2px rgba(212,175,55,0.2);
+  outline:none;
 }
 
-button{
+button {
   margin-top:18px;
   padding:12px 35px;
   border-radius:30px;
   border:none;
-  background:var(--gold);
+  background:#d4af37;
   color:black;
   font-weight:600;
   cursor:pointer;
   letter-spacing:1px;
   font-family:'Playfair Display', serif;
-  transition:transform 0.15s ease, background 0.2s ease;
+  transition:all 0.2s ease;
 }
 
-button:hover{
+button:hover {
   background:#f1d77a;
   transform:translateY(-1px);
 }
 
-.highlight{
-  color:var(--gold);
+.highlight {
+  color:#d4af37;
   font-weight:600;
 }
 
-.countdown{
+.countdown {
   margin:25px 0;
   font-size:1.2rem;
   letter-spacing:2px;
 }
 
-.details{
+.details {
   line-height:1.8;
   margin-top:20px;
 }
 
-.footer{
+.footer {
   margin-top:55px;
   font-size:0.75rem;
   opacity:0.5;
   letter-spacing:2px;
 }
 
-a.location-link{
-  color:var(--gold);
+/* Harp watermark */
+.harp {
+  position:fixed;
+  bottom:20px;
+  right:25px;
+  width:55px;
+  opacity:0.05;
+  pointer-events:none;
+}
+
+a.location-link {
+  color:#d4af37;
   text-decoration:none;
   font-size:0.9rem;
 }
-a.location-link:hover{ text-decoration:underline; }
 
-/* Real harp watermark */
-.harp{
-  position:fixed;
-  bottom:18px;
-  right:20px;
-  width:58px;
-  opacity:0.07;           /* subtle */
-  pointer-events:none;
-  filter:drop-shadow(0 0 10px rgba(212,175,55,0.12));
+a.location-link:hover{
+  text-decoration:underline;
 }
+
 </style>
 </head>
 
@@ -206,29 +191,16 @@ a.location-link:hover{ text-decoration:underline; }
 Sexy Craic • Dublin
 </div>
 
-<!-- REAL harp watermark (clean outline) -->
-<div class="harp" aria-hidden="true">
-  <svg viewBox="0 0 64 64" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <!-- harp body -->
-    <path d="M40 10c-8 2-13 9-13 18v21c0 4-3 7-7 7"/>
-    <path d="M40 10c6 7 9 15 9 27v12c0 5-4 9-9 9H28"/>
-    <!-- soundboard curve -->
-    <path d="M27 26c6 2 13 2 22-1"/>
-    <!-- base -->
-    <path d="M16 56h27"/>
-    <!-- strings -->
-    <path d="M33 18v34"/>
-    <path d="M37 17v35"/>
-    <path d="M41 16v36"/>
-    <path d="M45 15v37"/>
-  </svg>
+<!-- Subtle Harp -->
+<div class="harp">
+<svg viewBox="0 0 512 512" fill="#d4af37">
+<path d="M256 32c-88 0-160 72-160 160 0 64 40 120 96 144v112h128V336c56-24 96-80 96-144 0-88-72-160-160-160z"/>
+</svg>
 </div>
 
 <script>
-// PASSWORD
-const correctPassword = "slainte";
 
-// COUNTDOWN DATE
+const correctPassword = "slainte";
 const partyDate = new Date("March 14, 2026 20:00:00").getTime();
 
 function checkPassword(){
@@ -241,21 +213,17 @@ function checkPassword(){
   }
 }
 
-// COUNTDOWN
 function updateCountdown(){
   const now = new Date().getTime();
   const distance = partyDate - now;
-
   if(distance < 0){
     document.getElementById("timer").innerHTML = "Doors Open.";
     return;
   }
-
   const d = Math.floor(distance / (1000*60*60*24));
   const h = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
   const m = Math.floor((distance % (1000*60*60))/(1000*60));
   const s = Math.floor((distance % (1000*60))/1000);
-
   document.getElementById("timer").innerHTML =
     d+"D "+h+"H "+m+"M "+s+"S";
 }
@@ -263,7 +231,6 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-// RSVP
 function submitRSVP() {
   const name = document.getElementById("guestName").value.trim();
   const msg = document.getElementById("rsvpMsg");
@@ -279,6 +246,7 @@ function submitRSVP() {
 
   window.open("https://forms.gle/EVHBFan5UkGoGiDy6", "_blank");
 }
+
 </script>
 
 </body>
