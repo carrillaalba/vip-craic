@@ -117,6 +117,12 @@ button:hover {
   line-height:1.9;
   margin-top:18px;
 }
+
+  /* VIP message styling */
+#vipWelcome div{
+  line-height: 1.75;
+  letter-spacing: 0.5px;
+}
   
 .footer {
   margin-top:55px;
@@ -173,6 +179,8 @@ a.location-link:hover{
     brightness(98%)
     contrast(95%);
 }
+
+  
   
 </style>
 </head>
@@ -342,10 +350,9 @@ function submitRSVP() {
   const vipName = document.getElementById("vipName");
 
   vipName.innerHTML = `
-    Welcome, <span class="highlight">${formattedName}</span>.<br>
-    Your presence is expected.<br>
-    A proper craic awaits.
-  `;
+  Welcome, <span class="highlight">${formattedName}</span>.<br>
+  A proper craic awaits.
+`;
 
   welcomeBox.classList.remove("hidden");
 }
