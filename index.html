@@ -117,17 +117,6 @@ button:hover {
   line-height:1.9;
   margin-top:18px;
 }
-<div id="vipWelcome" class="hidden" style="margin-top:60px;">
-  <div style="
-    font-family:'Playfair Display', serif;
-    font-size:2.4rem;
-    color:#d8c07a;
-    text-align:center;
-    line-height:1.6;
-  ">
-    <span id="vipName"></span>
-  </div>
-</div>
   
 .footer {
   margin-top:55px;
@@ -150,13 +139,24 @@ a.location-link:hover{
 /* Harp watermark */
 .harp {
   position: fixed;
-  bottom: 40px;      /* move it up */
-  right: 40px;       /* move it inward */
-  width: 75px;       /* bigger */
-  opacity: 0.14;     /* more visible but still elegant */
+  bottom: 40px;
+  right: 40px;
+  width: 75px;
+  opacity: 0.14;
   pointer-events: none;
+  z-index: 0; /* keep behind content */
 }
 
+/* MOBILE VERSION */
+@media (max-width: 768px) {
+  .harp {
+    width: 45px;       /* smaller */
+    bottom: 20px;      /* lower */
+    right: 20px;
+    opacity: 0.08;     /* more subtle */
+  }
+}
+  
 .harp img{
   width:100%;
   height:auto;
@@ -229,6 +229,18 @@ a.location-link:hover{
 
     <p id="rsvpMsg" style="margin-top:12px;font-size:0.9rem;"></p>
   </div>
+
+  <div id="vipWelcome" class="hidden" style="margin-top:60px;">
+  <div style="
+    font-family:'Playfair Display', serif;
+    font-size:2.4rem;
+    color:#d8c07a;
+    text-align:center;
+    line-height:1.6;
+  ">
+    <span id="vipName"></span>
+  </div>
+</div>
 
 </div>
 
@@ -323,7 +335,7 @@ function submitRSVP() {
   });
 
   // Hide RSVP section
-  document.getElementById("guestName").parentElement.style.display = "none";
+  document.getElementById("rsvpSection").style.display = "none";
 
   // Show big VIP message
   const welcomeBox = document.getElementById("vipWelcome");
