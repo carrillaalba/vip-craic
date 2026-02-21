@@ -117,7 +117,18 @@ button:hover {
   line-height:1.9;
   margin-top:18px;
 }
-
+<div id="vipWelcome" class="hidden" style="margin-top:60px;">
+  <div style="
+    font-family:'Playfair Display', serif;
+    font-size:2.4rem;
+    color:#d8c07a;
+    text-align:center;
+    line-height:1.6;
+  ">
+    <span id="vipName"></span>
+  </div>
+</div>
+  
 .footer {
   margin-top:55px;
   font-size:0.75rem;
@@ -289,69 +300,43 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mpqjypev";
 
 function submitRSVP() {
   const nameRaw = document.getElementById("guestName").value.trim();
-  const msg = document.getElementById("rsvpMsg");
 
   if (!nameRaw) {
-    msg.style.color = "#ff4d4d";
-    msg.textContent = "Please enter your name.";
+    document.getElementById("rsvpMsg").style.color = "#ff4d4d";
+    document.getElementById("rsvpMsg").textContent = "Please enter your name.";
     return;
   }
 
-  const formattedName = nameRaw.charAt(0).toUpperCase() + nameRaw.slice(1);
+  const formattedName =
+    nameRaw.charAt(0).toUpperCase() + nameRaw.slice(1);
 
-  msg.style.color = "#d8c07a";
-  msg.innerHTML = `
-    <div style="margin-top:20px; line-height:1.8;">
-      Welcome, <span class="highlight">${escapeHtml(formattedName)}</span>.<br>
-      A proper craic awaits.
-    </div>
-  `;
-
-  const btn = document.querySelector('button[onclick="submitRSVP()"]');
-  if (btn) {
-    btn.disabled = true;
-    btn.style.opacity = "0.7";
-    btn.style.cursor = "not-allowed";
-  }
-
-  fetch(FORMSPREE_ENDPOINT, {
+  // Send to Formspree
+  fetch("https://formspree.io/f/mpqjypev", {
     method: "POST",
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      name: nameRaw,
-      page: "VIP Craic",
-      rsvp: "yes"
+      name: nameRaw
     })
-  })
-  .then(res => {
-    if (!res.ok) throw new Error("RSVP failed");
-  })
-  .then(() => {
-    const extra = document.createElement("div");
-    extra.style.marginTop = "10px";
-    extra.style.fontSize = "0.9rem";
-    extra.style.opacity = "0.85";
-    extra.textContent = "Guest list updated.";
-    msg.appendChild(extra);
-  })
-  .catch(() => {
-    msg.style.color = "#ff4d4d";
-    msg.textContent = "Couldn’t register right now — please try again.";
-  })
-  .finally(() => {
-    setTimeout(() => {
-      if (btn) {
-        btn.disabled = false;
-        btn.style.opacity = "1";
-        btn.style.cursor = "pointer";
-      }
-    }, 2500);
   });
-}
 
+  // Hide RSVP section
+  document.getElementById("guestName").parentElement.style.display = "none";
+
+  // Show big VIP message
+  const welcomeBox = document.getElementById("vipWelcome");
+  const vipName = document.getElementById("vipName");
+
+  vipName.innerHTML = `
+    Welcome, <span class="highlight">${formattedName}</span>.<br>
+    A proper craic awaits.
+  `;
+
+  welcomeBox.classList.remove("hidden");
+}
+  
 function escapeHtml(str) {
   return str.replace(/[&<>"']/g, m => ({
     "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
