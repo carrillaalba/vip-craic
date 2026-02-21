@@ -284,32 +284,80 @@ setInterval(updateCountdown,1000);
 updateCountdown();
 
 // RSVP
-function submitRSVP() {
+/* === RSVP (Formspree) === */
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mpqjypev";
 
-  const name = document.getElementById("guestName").value.trim();
+function submitRSVP() {
+  const nameRaw = document.getElementById("guestName").value.trim();
   const msg = document.getElementById("rsvpMsg");
 
-  if (!name) {
+  if (!nameRaw) {
     msg.style.color = "#ff4d4d";
     msg.textContent = "Please enter your name.";
     return;
   }
 
-  const formattedName =
-    name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  const formattedName = nameRaw.charAt(0).toUpperCase() + nameRaw.slice(1);
 
   msg.style.color = "#d8c07a";
   msg.innerHTML = `
     <div style="margin-top:20px; line-height:1.8;">
-      Welcome, <span class="highlight">${formattedName}</span>.<br>
+      Welcome, <span class="highlight">${escapeHtml(formattedName)}</span>.<br>
       A proper craic awaits.
     </div>
   `;
 
-  setTimeout(() => {
-    window.open("https://forms.gle/EVHBFan5UkGoGiDy6", "_blank");
-  }, 1900);
+  const btn = document.querySelector('button[onclick="submitRSVP()"]');
+  if (btn) {
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
+    btn.style.cursor = "not-allowed";
+  }
+
+  fetch(FORMSPREE_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: nameRaw,
+      page: "VIP Craic",
+      rsvp: "yes"
+    })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("RSVP failed");
+  })
+  .then(() => {
+    const extra = document.createElement("div");
+    extra.style.marginTop = "10px";
+    extra.style.fontSize = "0.9rem";
+    extra.style.opacity = "0.85";
+    extra.textContent = "Guest list updated.";
+    msg.appendChild(extra);
+  })
+  .catch(() => {
+    msg.style.color = "#ff4d4d";
+    msg.textContent = "Couldn’t register right now — please try again.";
+  })
+  .finally(() => {
+    setTimeout(() => {
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        btn.style.cursor = "pointer";
+      }
+    }, 2500);
+  });
 }
+
+function escapeHtml(str) {
+  return str.replace(/[&<>"']/g, m => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+  }[m]));
+}
+  
 </script>
 
 </body>
